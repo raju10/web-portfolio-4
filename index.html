@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body >
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main id="main" class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class (<span id="firstClass-total"> $ 150</span> )</label>
+                    <input id="firstClass-input" value="1" class="inp-style inp-width" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <button id="firstClass-incress-btn"><i class="fas fa-plus"></i></button>
+                    <button id="firstClass-decress-btn"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy (<span id="economy-total"> $ 100</span> )</label>
+                    <input id="economy-input" value="1" class="inp-style inp-width" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <button id="economy-incress-btn"><i class="fas fa-plus"></i></button>
+                    <button id="economy-decress-btn"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="total-price">$ 250</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10%  VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="tax">$ 25</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grand-total">$ 275</p>
+                    </div>
+                </div>
+            </div>
+            <button id="submit-btn" class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+        </div>
+    </section>
+   </main>
+   <div id="complite-info">
+       <h1> your submit complited</h1>
+       <i class="fas fa-check-circle"></i>
+   </div>
+   <script>
+
+    //    first-class-function //
+        document.getElementById("firstClass-incress-btn").addEventListener("click",function(){
+            handlePriceChange(true)
+        })
+        document.getElementById("firstClass-decress-btn").addEventListener("click",function(){
+            handlePriceChange(false)
+        })
+        function handlePriceChange(isIncress){
+            var firstClassInput = document.getElementById("firstClass-input");
+                firstClassInputNum = parseFloat(firstClassInput.value);
+            var firstClassNewInput = firstClassInputNum ;
+            if(isIncress == true){
+                firstClassNewInput = firstClassInputNum +1;
+            }
+            if(isIncress == false && firstClassNewInput >0){
+                firstClassNewInput = firstClassInputNum -1; 
+            }
+            firstClassInput.value = firstClassNewInput;
+
+            var firstClassTotal = firstClassNewInput * 150;
+            document.getElementById("firstClass-total").innerText = " $ "+firstClassTotal 
+            calculateTotal()
+        }
+
+
+        // economy-function //
+        document.getElementById("economy-incress-btn").addEventListener("click",function(){
+            handlePriceChange1(true)
+        })
+        document.getElementById("economy-decress-btn").addEventListener("click",function(){
+            handlePriceChange1(false)
+        })
+        function handlePriceChange1(isIncress){
+           var economyInput = document.getElementById("economy-input");
+               economyInputNum = parseFloat(economyInput.value);
+           var economyNewInput = economyInputNum ;
+           if(isIncress == true){
+               economyNewInput = economyInputNum +1
+           }
+           if(isIncress == false && economyNewInput >0){
+               economyNewInput = economyInputNum -1
+           }
+               economyInput.value = economyNewInput;
+
+           var economyTotal = economyNewInput * 100;
+           document.getElementById("economy-total").innerText =" $ " + economyTotal;
+           calculateTotal()
+        }
+
+
+        // total calculate function //
+        function calculateTotal(){
+            var firstClassInput = document.getElementById("firstClass-input");
+                firstClassInputNum = parseFloat(firstClassInput.value);
+
+            var economyInput = document.getElementById("economy-input");
+                economyInputNum = parseFloat(economyInput.value);
+           
+           var totalPrice = firstClassInputNum * 150 + economyInputNum * 100;
+
+           document.getElementById("total-price").innerText = "$ " + totalPrice;
+
+           var tax = totalPrice / 10;
+           document.getElementById("tax").innerText = "$ " + tax;
+
+           var grandTotal = totalPrice + tax;
+           document.getElementById("grand-total").innerText = "$ " + grandTotal;
+
+        }
+
+        // complite info 
+        document.getElementById("submit-btn").addEventListener("click",function(){
+            var main = document.getElementById("main");
+            main.style.display = "none";
+
+            var yo = document.getElementById("complite-info");
+            yo.style.display = "block"
+        })
+   </script>
+   
+   <script src="https://kit.fontawesome.com/ee3c098242.js" crossorigin="anonymous"> </script>
+</body>
+
+</html>
